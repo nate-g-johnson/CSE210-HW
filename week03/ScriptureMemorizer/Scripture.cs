@@ -18,21 +18,19 @@ public class Scripture
     public void HideRandomWord(int count)
     {
         var visibleWords = _words.Where(w => !w.IsHidden()).ToList();
-        if (visibleWords.Count <= count)
+        if (visibleWords.Count == 0)
         {
-            foreach (var word in visibleWords)
-            {
-                word.Hide();
-            }
+            return; // All words are already hidden
         }
-        else
+
+        var random = new Random();
+        visibleWords = visibleWords.OrderBy(w => random.Next()).ToList();
+
+        // Hide the specified number of words, but not more than what's available
+        int wordsToHide = Math.Min(count, visibleWords.Count);
+        for (int i = 0; i < wordsToHide; i++)
         {
-            for (int i = 0; i < count; i++)
-            {
-                int index = _random.Next(visibleWords.Count);
-                visibleWords[index].Hide();
-                visibleWords.RemoveAt(index);
-            }
+            visibleWords[i].Hide();
         }
     }
     public string GetDisplayText()
