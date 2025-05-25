@@ -15,7 +15,7 @@ public class Scripture
         _random = new Random();
     }
 
-    public void HideRandomWord(int count)
+    public void HideRandomWords(int count)
     {
         var visibleWords = _words.Where(w => !w.IsHidden()).ToList();
         if (visibleWords.Count == 0)
@@ -23,8 +23,7 @@ public class Scripture
             return; // All words are already hidden
         }
 
-        var random = new Random();
-        visibleWords = visibleWords.OrderBy(w => random.Next()).ToList();
+        visibleWords = visibleWords.OrderBy(w => _random.Next()).ToList();
 
         // Hide the specified number of words, but not more than what's available
         int wordsToHide = Math.Min(count, visibleWords.Count);

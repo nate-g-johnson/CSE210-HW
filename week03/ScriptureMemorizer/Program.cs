@@ -20,12 +20,12 @@ class Program
             {
                 break;
             }
-            scripture.HideRandomWord();
+            scripture.HideRandomWords(3);
         }
 
         Console.Clear();
         Console.WriteLine(scripture.GetDisplayText());
-        Console.WriteLine("/nAll words are hidden. Press Enter to extit.");
+        Console.WriteLine("\nAll words are hidden. Press Enter to extit.");
         Console.ReadLine();
     }
 }
